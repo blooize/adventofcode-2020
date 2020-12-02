@@ -35,25 +35,32 @@ public class Day1 {
         return numbers;
     }
 
-    public static int[] reverseArray(int[] arr){
-        ArrayList<Integer> reversed = new ArrayList<>();
-        int[] reversedArray = new int[arr.length];
-        for (int i = arr.length-1; i >= 0; i--) {
-            reversed.add(arr[i]);
-        }
-
-        for (int i = 0; i < reversedArray.length; i++) {
-            reversedArray[i] = reversed.get(i);
-        }
-        return reversedArray;
-    }
-
-    public static void productFinder(int[] forward, int[] reversed){
+    public static void productFinderPart1(int[] forward){
         for (int i = 0; i < forward.length; i++) {
-            for (int j = 0; j < reversed.length; j++) {
-                if ((forward[i] + reversed[j]) == 2020){
-                    System.out.printf("Found %s and %s for 2020 and the product is: %s", forward[i], reversed[j], forward[i] * reversed[j]);
-                    return;
+            for (int j = 0; j < forward.length; j++) {
+                if ((forward[i] + forward[j]) == 2020){
+                    System.out.printf("Part 1: Found %s and %s for 2020 and the product is: %s\n",
+                            forward[i],
+                            forward[j],
+                            forward[i] * forward[j]);
+                        return;
+                    }
+            }
+        }
+
+    }
+    public static void productFinderPart2(int[] forward){
+        for (int i = 0; i < forward.length; i++) {
+            for (int j = 0; j < forward.length; j++) {
+                for (int k = 0; k < forward.length; k++) {
+                    if ((forward[i] + forward[j] + forward[k]) == 2020){
+                        System.out.printf("Part 2: Found %s , %s and %s for 2020 and the product is: %s",
+                                forward[i],
+                                forward[j],
+                                forward[k],
+                                forward[i] * forward[j] * forward[k]);
+                        return;
+                }
                 }
             }
         }
@@ -62,9 +69,9 @@ public class Day1 {
 
     public static void main(String[] args) {
         int[] numbers = readFile("src/input.txt");
-        int[] reversed = reverseArray(numbers);
 
-        productFinder(numbers, reversed);
+        productFinderPart1(numbers);
+        productFinderPart2(numbers);
 
     }
 
